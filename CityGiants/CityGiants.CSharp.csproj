@@ -102,6 +102,7 @@
     <Compile Include="Assets\Anima2D\Scripts\SpriteMesh.cs" />
     <Compile Include="Assets\Anima2D\Scripts\SpriteMeshAnimation.cs" />
     <Compile Include="Assets\Anima2D\Scripts\SpriteMeshInstance.cs" />
+    <Compile Include="Assets\Scripts\Manager\M_Resource.cs" />
     <Compile Include="Assets\Scripts\Worker\Worker.cs" />
   </ItemGroup>
   <ItemGroup>
