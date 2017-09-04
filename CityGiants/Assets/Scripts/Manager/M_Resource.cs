@@ -35,48 +35,70 @@ public class M_Resource : MonoBehaviour
     public M_Resource()
     {
 
-        // Initialize all to base values
+        iFood = 0;
+        iMaterial = 0;
+
+        iMaxFood = 0;
+        iMaxMaterial = 0;
 
     }
 
     public void SetupManager()
     {
 
-        // Used for game startup
-        // Later on for loading a game
-        // Effectively just creates the initial game starting values
-        // Any effects brought in by celestials or giants will be done here
+        // For starting a new game
+        // Modded by Giants and Celestials in their respective classes
+        iFood = iSTARTFOOD;
+        iMaterial = iSTARTMATERIAL;
+
+        iMaxFood = iSTARTMAXFOOD;
+        iMaxMaterial = iSTARTMAXMATERIAL; 
 
     }
 
     #region Variable Setters
 
-    // Mods the current value and maximum of resources in the game
-    // Functions will also take into consideration the maximums and negative values
+    // When changing resource counts the following should always be true:
+    //   * Resource should never be negative
+    //   * Resource should never exceed its max
 
     public void ModFood( int aValue )
     {
+        
+        if (iFood + aValue < 0)
+            iFood = 0;
 
-        // Needs to take into consideration the maximum amount
+        else if (iFood + aValue > iMaxFood)
+            iFood = iMaxFood;
+
+        else
+            iFood += aValue;  
 
     }
 
     public void ModMaxFood( int aValue )
     {
-
+        iMaxFood += aValue;
     }
 
 
     public void ModMaterial( int aValue )
     {
 
-        // Needs to take into consideration the minimum amount
+        if (iMaterial + aValue < 0)
+            iMaterial = 0;
+
+        else if (iMaterial + aValue > iMaxMaterial)
+            iMaterial = iMaxMaterial;
+
+        else
+            iMaterial += aValue; 
 
     }
 
     public void ModMaxMaterial( int aValue )
     {
-
+        iMaxMaterial += aValue; 
     }
 
     #endregion
