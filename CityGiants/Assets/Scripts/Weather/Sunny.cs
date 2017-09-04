@@ -14,6 +14,18 @@ using UnityEngine;
 
 public class Sunny : Weather {
 
+    #region Member Variables
+
+    public Sprite sprParticleSunny { get; private set; }
+    public Sprite sprSpriteSunny { get; private set; }
+    public string sNameSunny { get; private set; }
+    public string sWeatherEffectsSunny { get; private set; }
+    public WeatherRange enWeatherRangeSunny { get; private set; }
+    public bool bWeatherStatusSunny { get; private set; }
+    public bool bParticleStatusSunny { get; private set; }
+
+    #endregion 
+
     #region Functions
 
     public Sunny() : base()
@@ -21,15 +33,11 @@ public class Sunny : Weather {
         //Inherited and overriding the base constructor with appropriate info
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public Sunny(Sprite aParticle, Sprite aSprite, string aName, string[] aWeatherEffects, WeatherEffect aEffect, WeatherRange aWeatherRange, bool aWeatherStatus, bool aParticleStatus) 
+        : base(aParticle, aSprite, aName, aWeatherEffects, aEffect, aWeatherRange,aWeatherStatus, aParticleStatus)
+    { 
+        //Inherited and overriding the base constructor with appropriate info
+    }
 
     #endregion
 }

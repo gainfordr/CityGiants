@@ -21,7 +21,7 @@ public class ForecastManager : MonoBehaviour {
     public List<Weather> wObjs { get; private set; }
     public Weather wCurrentweather { get; private set; }
     public LandTerrain ltCurrentTerrain { get; private set; }
-    public Sprite sprWeatherParticle { get; private set; }
+    
     public Sprite[] sprParallaxBackground { get; private set; }
 
     public int iTimeLength { get; private set; }
@@ -36,6 +36,25 @@ public class ForecastManager : MonoBehaviour {
         //Weather and LandTerrain variants
         InitLandTerrain();
         InitWeather();
+
+    }
+
+    void CycleWeatherEffects()
+    {
+        //This will apply the effects of all current weather in play
+    }
+
+    void Forecast()
+    {
+        //Terrain should be selected first, as the type of terrain will
+        // modify what type of weather will be selected. EX: snow wont happen
+        // in a desert terrain, or a heat wave in tundra 
+        LandTerrain tempTerrain = SelectNewTerrain();
+
+
+        //Once we know the new terrain, we take it and can figure out what weather we can have
+        SelectNewWeather(tempTerrain);
+
 
     }
 
@@ -56,25 +75,26 @@ public class ForecastManager : MonoBehaviour {
         ltObjs.Add(new Forest());
     }
 
-    void SelectNewWeather()
+    void SelectNewWeather(LandTerrain aTerrain)
     {
         //After a weathereffect is done, select a new weather effect
+        // based on the weather given, so as to only allow certain weather
+
+        //Will probably add in a random num to choose between however many weather
+        // is allowed for a terrain type, maybe weigh the weathers differently 
     }
 
-    void SelectNewTerrain()
+    LandTerrain SelectNewTerrain()
     {
-        //Select a new terrain after 
-    }
+        //Select a new terrain
+        LandTerrain tempTerrain = new LandTerrain();
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        //Might randomize which Terrain the tempTerrain will be
+        // Different terrain weighted differently
+
+        return tempTerrain;
+    }
+ 
 
     #endregion
 }
