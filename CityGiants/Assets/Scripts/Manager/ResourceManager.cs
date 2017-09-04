@@ -12,7 +12,7 @@ using UnityEngine;
 //
 // *****************************************************************************
 
-public class M_Resource : MonoBehaviour
+public class ResourceManager : MonoBehaviour
 {
 
     #region Member Variables
@@ -32,7 +32,7 @@ public class M_Resource : MonoBehaviour
 
     #endregion
 
-    public M_Resource()
+    public ResourceManager()
     {
 
         iFood = 0;
