@@ -104,6 +104,7 @@
     <Compile Include="Assets\Anima2D\Scripts\SpriteMeshInstance.cs" />
     <Compile Include="Assets\Scripts\Manager\ForecastManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ResourceManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\WorkerManager.cs" />
     <Compile Include="Assets\Scripts\Terrain\Forest.cs" />
     <Compile Include="Assets\Scripts\Terrain\Grassland.cs" />
     <Compile Include="Assets\Scripts\Terrain\LandTerrain.cs" />

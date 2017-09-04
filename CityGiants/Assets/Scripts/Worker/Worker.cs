@@ -5,7 +5,7 @@ using UnityEngine;
 // *****************************************************************************
 // Author: Ryan Gainford
 // Created: August 12, 2017 
-// Updated: August 12, 2017
+// Updated: September 4, 2017
 //
 // Description: Contains the base worker class object that defines its traits 
 // and other important variables. 
@@ -34,23 +34,6 @@ public class Worker : MonoBehaviour
     public Worker()
     {
 
-        sName = "";
-        iHealth = 0;
-        sprSprite = null;
-
-        iFarmer = 0;
-        iGatherer = 0;
-        iCrafter = 0;
-        iAdventurer = 0;
-        iResearcher = 0;
-        iMilitary = 0;
-        iBuilder = 0;
-
-    }
-
-    public void CreateWorker()
-    {
-
         NameGenerator tempGenerator = new NameGenerator();
 
         sName = tempGenerator.GenerateNewName();
@@ -68,17 +51,33 @@ public class Worker : MonoBehaviour
 }
 
 
+public class WorkerGenerator
+{
+
+    // Cut out the create worker from the Worker class and make a generator for it 
+    // to create workers. No reason to make a worker to call create worker. 
+
+    public WorkerGenerator()
+    {
+
+    }
+
+    public Worker CreateWorker()
+    {
+        Worker tempWorker = new Worker();
+        return tempWorker;  
+    }
+
+}
+
+
 public class NameGenerator
 {
 
-    #region First Names
+    #region Member Variables
 
     private string[] FirstNames = new string[] { "John", "Sam", "Lucy", "Garfield", "Cindy", "Cassidy", "Elvis", "Joan", "Johnny", "Samantha", "Eliza", "George", "Cassidy",
                                                  "Lindsey" };
-
-    #endregion
-
-    #region Last Names
 
     private string[] LastNames = new string[] { "Gainford", "Smith", "Fletcher", "Fitzgerald" };
 
