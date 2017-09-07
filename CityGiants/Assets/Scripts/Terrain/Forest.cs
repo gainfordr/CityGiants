@@ -17,7 +17,7 @@ public class Forest : LandTerrain {
     #region Member Variables
 
     public Sprite[] sprSpriteForest { get; private set; }
-    public string[] sEffectsForest { get; private set; }
+    public Dictionary<ResourceList, int> dResourcesForest { get; private set; }
     public string sNameForest { get; private set; }
     public MoveRange enRangeForest { get; private set; }
     public ExpeditionAvailability enAvailForest { get; private set; }
@@ -31,12 +31,12 @@ public class Forest : LandTerrain {
 
     }
 
-    public Forest(Sprite[] aSprite, string[] aEffects, string aName, MoveRange aRange, ExpeditionAvailability aAvail) 
-        : base(aSprite, aEffects, aName, aRange, aAvail)
+    public Forest(Sprite[] aSprite, Dictionary<ResourceList, int> aResources, string aName, MoveRange aRange, ExpeditionAvailability aAvail) 
+        : base(aSprite, aResources, aName, aRange, aAvail)
     {
         //Inherited and overriding the base constructor with appropriate info
         this.sprSpriteForest = aSprite;
-        this.sEffectsForest = aEffects;
+        this.dResourcesForest = aResources;
         this.sNameForest = aName;
         this.enRangeForest = aRange;
         this.enAvailForest = aAvail;

@@ -17,7 +17,7 @@ public class Tundra : LandTerrain {
     #region Member Variables
 
     public Sprite[] sprSpriteTundra { get; private set; }
-    public string[] sEffectsTundra { get; private set; }
+    public Dictionary<ResourceList, int> dResourcesTundra { get; private set; }
     public string sNameTundra { get; private set; }
     public MoveRange enRangeTundra { get; private set; }
     public ExpeditionAvailability enAvailTundra { get; private set; }
@@ -32,12 +32,12 @@ public class Tundra : LandTerrain {
 
     }
 
-    public Tundra(Sprite[] aSprite, string[] aEffects, string aName, MoveRange aRange, ExpeditionAvailability aAvail) 
-        : base(aSprite, aEffects, aName, aRange, aAvail)
+    public Tundra(Sprite[] aSprite, Dictionary<ResourceList, int> aResourcesTundra, string aName, MoveRange aRange, ExpeditionAvailability aAvail) 
+        : base(aSprite, aResourcesTundra, aName, aRange, aAvail)
     {
         //Inherited and overriding the base constructor with appropriate info
         this.sprSpriteTundra = aSprite;
-        this.sEffectsTundra = aEffects;
+        this.dResourcesTundra = aResourcesTundra;
         this.sNameTundra = aName;
         this.enRangeTundra = aRange;
         this.enAvailTundra = aAvail;
