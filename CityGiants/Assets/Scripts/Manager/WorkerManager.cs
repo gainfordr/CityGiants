@@ -35,8 +35,10 @@ public class WorkerManager : MonoBehaviour
     public void CreateWorkerPool()
     {
 
-        // Create the worker generator and then add the ppool of workers
+        // Create the worker generator and then add the pool of workers
         WorkerGenerator tempWorkerGenerator = new WorkerGenerator();
+
+        ListOfWorkers.Clear(); 
 
         for (int i = 0; i < iWORKERPOOLSIZE; i++)
         {
@@ -48,10 +50,13 @@ public class WorkerManager : MonoBehaviour
     public Worker AddWorker()
     {
 
-        // Return a worker from the list of workers
-        // Replace that worker using the worker generator in the active list (ListOfWorkers)
+        // Returns a worker and then replaces that worker in the list
+        Worker tempWorker = ListOfWorkers[Random.Range(0, ListOfWorkers.Count)];
 
-        return new Worker(); 
+        WorkerGenerator tempWorkerGenerator = new WorkerGenerator();
+        ListOfWorkers[ListOfWorkers.IndexOf(tempWorker)] = tempWorkerGenerator.CreateWorker(); 
+
+        return tempWorker; 
 
     }
 

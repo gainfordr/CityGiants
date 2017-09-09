@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// *****************************************************************************
+// Author: Ryan Gainford
+// Created: September 9, 2017 
+// Updated: September 9, 2017
+//
+// Description: The Game Manager should update everything in game. The main menu
+// will transtiion to this from another scene. The Game Manager will handle a 
+// a player's active turn, end of turn, and the win conditions. 
+//
+// *****************************************************************************
+
 public class GameManager : MonoBehaviour
 {
 

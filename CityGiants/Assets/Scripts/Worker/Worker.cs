@@ -54,8 +54,8 @@ public class Worker : MonoBehaviour
 public class WorkerGenerator
 {
 
-    // Cut out the create worker from the Worker class and make a generator for it 
-    // to create workers. No reason to make a worker to call create worker. 
+    // This generator's only purpose is to create workers for the worker pool in the
+    // Worker manager
 
     public WorkerGenerator()
     {
@@ -77,7 +77,7 @@ public class NameGenerator
     #region Member Variables
 
     private string[] FirstNames = new string[] { "John", "Sam", "Lucy", "Garfield", "Cindy", "Cassidy", "Elvis", "Joan", "Johnny", "Samantha", "Eliza", "George", "Cassidy",
-                                                 "Lindsey" };
+                                                 "Lindsey", "David", "Markus" };
 
     private string[] LastNames = new string[] { "Gainford", "Smith", "Fletcher", "Fitzgerald" };
 
