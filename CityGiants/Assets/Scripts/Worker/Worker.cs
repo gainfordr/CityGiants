@@ -21,13 +21,13 @@ public class Worker : MonoBehaviour
     public int iHealth { get; private set; }
     public Sprite sprSprite { get; private set; }
 
-    public int iFarmer { get; private set; }
-    public int iGatherer { get; private set; }
-    public int iCrafter { get; private set; }
-    public int iAdventurer { get; private set; }
-    public int iResearcher { get; private set; }
-    public int iMilitary { get; private set; }
-    public int iBuilder { get; private set; }
+    public int iTraitFarmer { get; private set; }
+    public int iTraitGatherer { get; private set; }
+    public int iTraitCrafter { get; private set; }
+    public int iTraitAdventurer { get; private set; }
+    public int iTraitResearcher { get; private set; }
+    public int iTraitMilitary { get; private set; }
+    public int iTraitBuilder { get; private set; }
 
     #endregion
 
@@ -38,13 +38,13 @@ public class Worker : MonoBehaviour
 
         sName = tempGenerator.GenerateNewName();
 
-        iFarmer = Random.Range(1, 10);
-        iGatherer = Random.Range(1, 10);
-        iCrafter = Random.Range(1, 10);
-        iAdventurer = Random.Range(1, 10);
-        iResearcher = Random.Range(1, 10);
-        iMilitary = Random.Range(1, 10);
-        iBuilder = Random.Range(1, 10);
+        iTraitFarmer = Random.Range(1, 10);
+        iTraitGatherer = Random.Range(1, 10);
+        iTraitCrafter = Random.Range(1, 10);
+        iTraitAdventurer = Random.Range(1, 10);
+        iTraitResearcher = Random.Range(1, 10);
+        iTraitMilitary = Random.Range(1, 10);
+        iTraitBuilder = Random.Range(1, 10);
 
     }
 
