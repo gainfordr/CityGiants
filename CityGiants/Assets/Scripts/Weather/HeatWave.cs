@@ -12,25 +12,26 @@ using UnityEngine;
  * 
  */
 
-public class Rain : Weather {
-
+public class HeatWave : Weather {
 
     #region Functions
 
-    public Rain(GameObject pSpr)
+    public HeatWave(GameObject pSpr)
     {
         //Inherit setting functions to set it correctly
-        base.AssignID(0);
-        base.AssignName("Rain");
+        base.AssignID(8);
+        base.AssignName("HeatWave");
 
         GameObject tempSpr = pSpr;
         base.AssignParticle(tempSpr);
 
         Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
-        tempDict.Add(WeatherEffect.Agriculture, 1);
+        tempDict.Add(WeatherEffect.Agriculture, -1);
         tempDict.Add(WeatherEffect.Production, -1);
+        tempDict.Add(WeatherEffect.Defense, 1);
+        tempDict.Add(WeatherEffect.Meat, 1);
         base.AssignDictionary(tempDict);
     }
 
-    #endregion
+    #endregion 
 }

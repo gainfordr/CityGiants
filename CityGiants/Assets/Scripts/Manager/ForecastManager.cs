@@ -5,7 +5,7 @@ using UnityEngine;
 /* **********************************************************
  * Author: Jared Rosenberger
  * Created: September 3rd, 2017
- * Updated: September 6th, 2017
+ * Updated: November 10th, 2017
  * 
  * Description: Holds the variables of types Weather and LandTerrain,
  * holds the parallax (landTerrain) and Particles[], the current weather
@@ -123,18 +123,22 @@ public class ForecastManager : MonoBehaviour {
     //Inits a list of Weather objects for all the Weather types
     void InitWeather()
     {
+        /*
         wObjs = new List<Weather>();
         wObjs.Add(new Rain());
         wObjs.Add(new Sunny());
+        */
     }
 
     //Inits a list of LandTerrain objects for all LandTerrain types
     void InitLandTerrain()
     {
+        /*
         ltObjs = new List<LandTerrain>();
         ltObjs.Add(new Grassland());
         ltObjs.Add(new Tundra());
         ltObjs.Add(new Forest());
+        */
     }
 
 
@@ -196,11 +200,11 @@ public class ForecastManager : MonoBehaviour {
         switch(iRange)
         {
             case 1: //Sunny
-                wTempWeather = new Sunny();
+                //wTempWeather = new Sunny();
                 return wTempWeather;
 
             case 2: //Rain
-                wTempWeather = new Rain();
+                //wTempWeather = new Rain();
                 return wTempWeather;
 
             case 3: //Cloudy
@@ -239,15 +243,15 @@ public class ForecastManager : MonoBehaviour {
         switch (iRange)
         {
             case 1: //Forest
-                tempTerrain = new Forest();
+                //tempTerrain = new Forest();
                 return tempTerrain;
 
             case 2: //Grassland
-                tempTerrain = new Grassland();
+                //tempTerrain = new Grassland();
                 return tempTerrain;
 
             case 3: //Tundra
-                tempTerrain = new Tundra();
+                //tempTerrain = new Tundra();
                 return tempTerrain;
 
             case 4: //Lake
@@ -293,7 +297,7 @@ public class ForecastManager : MonoBehaviour {
         //When called, will set the terrain to the specific terrain given
         //Will also set the parallax background to what the terrain has
         ltCurrentTerrain = aLandTerrain;
-        sprParallaxBackground = ltCurrentTerrain.sprSprite;
+        //sprParallaxBackground = ltCurrentTerrain.sprSprite;
 
     }
 

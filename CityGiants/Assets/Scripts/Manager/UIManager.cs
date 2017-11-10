@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour {
     #region Member Variables
 
     public Canvas cCurrentCanvas { get; private set; }
+    public Canvas cPreviousCanvas { get; private set; }
     public List<BaseMenu> lMenuList { get; private set; }
     public Text tFoodText { get; private set; }
     public Text tWoodText { get; private set; }
@@ -46,6 +47,7 @@ public class UIManager : MonoBehaviour {
     public void SwitchMenu(Canvas aNewMenu)
     {
         //Switches menu based on the canvas given to it
+        cPreviousCanvas = cCurrentCanvas;
         cCurrentCanvas = aNewMenu;
     }
 

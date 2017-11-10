@@ -4,7 +4,7 @@ using UnityEngine;
 
 /* **********************************************************
  * Author: Jared Rosenberger
- * Created: September 3rd, 2017
+ * Created: November 10th, 2017
  * Updated: November 10th, 2017
  * 
  * Description: Inherits from Weather, used for the specific weather
@@ -12,25 +12,23 @@ using UnityEngine;
  * 
  */
 
-public class Sunny : Weather {
-
+public class Windy : Weather {
 
     #region Functions
 
-    public Sunny(GameObject pSpr)
+    public Windy(GameObject pSpr)
     {
         //Inherit setting functions to set it correctly
         base.AssignID(0);
-        base.AssignName("Sunny");
+        base.AssignName("Windy");
 
         GameObject tempSpr = pSpr;
         base.AssignParticle(tempSpr);
 
         Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
-        tempDict.Add(WeatherEffect.Food, 1);
-        tempDict.Add(WeatherEffect.Research, -1);
+        tempDict.Add(WeatherEffect.None, 0);
         base.AssignDictionary(tempDict);
     }
 
-   #endregion
+    #endregion
 }
