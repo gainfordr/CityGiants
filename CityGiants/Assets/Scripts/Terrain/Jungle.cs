@@ -16,6 +16,23 @@ public class Jungle : LandTerrain {
 
     #region Functions
 
+    public Jungle()
+    {
+        AssignID(7);
+        AssignName("Jungle");
+        Sprite tempSpr = null;
+        AssignSprite(tempSpr);
+        Dictionary<ResourceList, int> tempDict = new Dictionary<ResourceList, int>();
+
+        tempDict.Add(ResourceList.Wood, 1);
+        tempDict.Add(ResourceList.Hunt, 1);
+        tempDict.Add(ResourceList.WildProduce, 1);
+
+        AssignDictionary(tempDict);
+        AssignMoveRange(MoveRange.Long);
+        AssignExpedition(ExpeditionAvailability.Extreme);
+    }
+
     public Jungle(Sprite pSpr)
     {
         AssignID(7);

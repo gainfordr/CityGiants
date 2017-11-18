@@ -17,6 +17,21 @@ public class Rain : Weather {
 
     #region Functions
 
+    public Rain()
+    {
+        //Inherit setting functions to set it correctly
+        base.AssignID(0);
+        base.AssignName("Rain");
+
+        GameObject tempSpr = null;
+        base.AssignParticle(tempSpr);
+
+        Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
+        tempDict.Add(WeatherEffect.Agriculture, 1);
+        tempDict.Add(WeatherEffect.Production, -1);
+        base.AssignDictionary(tempDict);
+    }
+
     public Rain(GameObject pSpr)
     {
         //Inherit setting functions to set it correctly

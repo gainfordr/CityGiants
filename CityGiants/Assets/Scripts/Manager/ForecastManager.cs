@@ -17,17 +17,16 @@ public class ForecastManager : MonoBehaviour {
 
     #region Member Variables
 
-    public List<LandTerrain> ltObjs { get; private set; }
-    public List<Weather> wObjs { get; private set; }
-    public Weather wCurrentweather { get; private set; }
-    public LandTerrain ltCurrentTerrain { get; private set; }
-    public List<Weather> wMapWeather { get; private set; }
-    public List<LandTerrain> ltMapTerrain { get; private set; }
-    public Sprite[] sprParallaxBackground { get; private set; }
-    public int iForecastLength = 3;
+    public List<LandTerrain> ltObjs { get; private set; }           //Array of LandTerrain Objects, of forecastLength
+    public List<Weather> wObjs { get; private set; }                //Array of Weather Objects, of forecastLength
+    public Weather wCurrentWeather { get; private set; }            //Reference to current Weather in play
+    public LandTerrain ltCurrentTerrain { get; private set; }       //Reference to current Terrain in play
+    public Sprite[] sprParallaxBackground { get; private set; }     //Reference to sprites used to illustrate the parallax background
+    public int iForecastLength { get; private set; }
 
-    public const int iWEATHERTYPEAMOUNT = 2;
-    public const int iTERRAINTYPEAMOUNT = 3;
+    private const int iDEFAULTFORECASTLENGTH = 3;                   //Const to init the forecast length to
+    private const int iWEATHERTYPEAMOUNT = 9;
+    private const int iTERRAINTYPEAMOUNT = 9;
     public int iTimeLength { get; private set; }
 
     #endregion
@@ -38,9 +37,7 @@ public class ForecastManager : MonoBehaviour {
     {
         //Used to initialize the values of the different
         //Weather and LandTerrain variants
-        InitLandTerrain();
-        InitWeather();
-
+        iForecastLength = iDEFAULTFORECASTLENGTH;
         //Sets the current weather and current terrain to start
         SetupForecast();
     }
@@ -61,84 +58,68 @@ public class ForecastManager : MonoBehaviour {
             {
                 case 1: //Forest
                     ltTempTerrain = SelectNewTerrain(1);
-                    wMapWeather.Add(SelectNewWeather(ltTempTerrain));
-                    ltMapTerrain.Add(ltTempTerrain);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
                     break;
 
                 case 2: //Grassland
                     ltTempTerrain = SelectNewTerrain(2);
-                    wMapWeather.Add(SelectNewWeather(ltTempTerrain));
-                    ltMapTerrain.Add(ltTempTerrain);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
                     break;
 
                 case 3: //Tundra
                     ltTempTerrain = SelectNewTerrain(3);
-                    wMapWeather.Add(SelectNewWeather(ltTempTerrain));
-                    ltMapTerrain.Add(ltTempTerrain);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
                     break;
 
                 case 4: //Lake
-
-                    SelectNewWeather(ltTempTerrain);
+                    ltTempTerrain = SelectNewTerrain(4);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
                     break;
 
                 case 5: //Mountain
-
-                    SelectNewWeather(ltTempTerrain);
+                    ltTempTerrain = SelectNewTerrain(5);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
                     break;
 
                 case 6: //Swamp
-
-                    SelectNewWeather(ltTempTerrain);
+                    ltTempTerrain = SelectNewTerrain(6);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
                     break;
 
                 case 7: //Desert
-
-                    SelectNewWeather(ltTempTerrain);
+                    ltTempTerrain = SelectNewTerrain(7);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
                     break;
 
                 case 8: //Jungle
-
-                    SelectNewWeather(ltTempTerrain);
+                    ltTempTerrain = SelectNewTerrain(8);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
                     break;
 
                 case 9: //Wasteland
-
-                    SelectNewWeather(ltTempTerrain);
+                    ltTempTerrain = SelectNewTerrain(9);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
                     break;
             }
         }
 
-        
-
+        SetCurrentWeather(wObjs[0]);
+        SetCurrentTerrain(ltObjs[0]);
     }
 
     void CycleWeatherEffects()
     {
         //This will apply the effects of all current weather in play
 
-    }
-
-
-    //Inits a list of Weather objects for all the Weather types
-    void InitWeather()
-    {
-        /*
-        wObjs = new List<Weather>();
-        wObjs.Add(new Rain());
-        wObjs.Add(new Sunny());
-        */
-    }
-
-    //Inits a list of LandTerrain objects for all LandTerrain types
-    void InitLandTerrain()
-    {
-        /*
-        ltObjs = new List<LandTerrain>();
-        ltObjs.Add(new Grassland());
-        ltObjs.Add(new Tundra());
-        ltObjs.Add(new Forest());
-        */
     }
 
 
@@ -200,32 +181,39 @@ public class ForecastManager : MonoBehaviour {
         switch(iRange)
         {
             case 1: //Sunny
-                //wTempWeather = new Sunny();
+                wTempWeather = new Sunny();
                 return wTempWeather;
 
             case 2: //Rain
-                //wTempWeather = new Rain();
+                wTempWeather = new Rain();
                 return wTempWeather;
 
             case 3: //Cloudy
+                wTempWeather = new Cloudy();
                 return wTempWeather;
 
             case 4: //Snow
+                wTempWeather = new Snow();
                 return wTempWeather;
 
             case 5: //Windy
+                wTempWeather = new Windy();
                 return wTempWeather;
 
             case 6: //Thunderstorm
+                wTempWeather = new Thunderstorm();
                 return wTempWeather;
 
             case 7: //Hail
+                wTempWeather = new Hail();
                 return wTempWeather;
 
             case 8: //Fog
+                wTempWeather = new Fog();
                 return wTempWeather;
 
             case 9: //HeatWave
+                wTempWeather = new HeatWave();
                 return wTempWeather;
         }
 
@@ -243,41 +231,39 @@ public class ForecastManager : MonoBehaviour {
         switch (iRange)
         {
             case 1: //Forest
-                //tempTerrain = new Forest();
+                tempTerrain = new Forest();
                 return tempTerrain;
 
             case 2: //Grassland
-                //tempTerrain = new Grassland();
+                tempTerrain = new Grassland();
                 return tempTerrain;
 
             case 3: //Tundra
-                //tempTerrain = new Tundra();
+                tempTerrain = new Tundra();
                 return tempTerrain;
 
             case 4: //Lake
-                
+                tempTerrain = new Lake();
                 break;
 
             case 5: //Mountain
-
-                
+                tempTerrain = new Mountain();
                 break;
 
             case 6: //Swamp
-
-               
+                tempTerrain = new Swamp();
                 break;
 
             case 7: //Desert
-
-               
+                tempTerrain = new Desert();
                 break;
 
             case 8: //Jungle
-
+                tempTerrain = new Jungle();
                 break;
 
             case 9: //Wasteland
+                tempTerrain = new Wasteland();
                 break;
         }
 
@@ -288,8 +274,8 @@ public class ForecastManager : MonoBehaviour {
 
     void SetCurrentWeather(Weather aWeather)
     {
-        wCurrentweather = aWeather;
-        iTimeLength = InitWeatherLength(wCurrentweather.enWeatherRange);
+        wCurrentWeather = aWeather;
+        iTimeLength = InitWeatherLength(wCurrentWeather.enWeatherRange);
     }
 
     void SetCurrentTerrain(LandTerrain aLandTerrain)
@@ -304,6 +290,12 @@ public class ForecastManager : MonoBehaviour {
     void HandleParallax()
     {
         // Function to handle the parallax background for each terrain
+        
+        //Center layer moves at a uniform speed
+
+        //Two foreground layers will have a speed relatively lower than the center layer
+
+        //Two background layers will have a speed relatively higher than the center layer
     }
 
     //Given the weatherrange, it will set the time length on

@@ -16,6 +16,19 @@ public class Wasteland :LandTerrain {
 
     #region Functions
 
+    public Wasteland()
+    {
+        AssignID(8);
+        AssignName("Wasteland");
+        Sprite tempSpr = null;
+        AssignSprite(tempSpr);
+        AssignMoveRange(MoveRange.Short);
+        AssignExpedition(ExpeditionAvailability.High);
+        Dictionary<ResourceList, int> tempDict = new Dictionary<ResourceList, int>();
+        tempDict.Add(ResourceList.None, 0);
+        AssignDictionary(tempDict);
+    }
+
     public Wasteland(Sprite pSpr)
     {
         AssignID(8);

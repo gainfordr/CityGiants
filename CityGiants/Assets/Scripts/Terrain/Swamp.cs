@@ -13,7 +13,23 @@ using UnityEngine;
  */
 
 public class Swamp : LandTerrain {
+   
     #region Functions
+
+    public Swamp()
+    {
+        AssignID(5);
+        AssignName("Swamp");
+        Sprite tempSpr = null;
+        AssignSprite(tempSpr);
+        AssignMoveRange(MoveRange.Long);
+        AssignExpedition(ExpeditionAvailability.Low);
+        Dictionary<ResourceList, int> tempDict = new Dictionary<ResourceList, int>();
+        tempDict.Add(ResourceList.Hunt, 1);
+        tempDict.Add(ResourceList.Fish, 1);
+        tempDict.Add(ResourceList.WildProduce, 1);
+        AssignDictionary(tempDict);
+    }
 
     public Swamp(Sprite pSpr)
     {

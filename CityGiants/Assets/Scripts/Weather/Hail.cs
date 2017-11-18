@@ -16,6 +16,24 @@ public class Hail : Weather {
 
     #region Functions
 
+    public Hail()
+    {
+        //Inherit setting functions to set it correctly
+        base.AssignID(6);
+        base.AssignName("Hail");
+
+        GameObject tempSpr = null;
+        base.AssignParticle(tempSpr);
+
+        Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
+        tempDict.Add(WeatherEffect.Food, -1);
+        tempDict.Add(WeatherEffect.Construction, 0);
+        tempDict.Add(WeatherEffect.Research, 1);
+        tempDict.Add(WeatherEffect.Arcane, 1);
+        tempDict.Add(WeatherEffect.Defense, 1);
+        base.AssignDictionary(tempDict);
+    }
+
     public Hail(GameObject pSpr)
     {
         //Inherit setting functions to set it correctly

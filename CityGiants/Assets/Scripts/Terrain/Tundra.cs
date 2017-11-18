@@ -16,6 +16,21 @@ public class Tundra : LandTerrain {
 
     #region Functions
 
+    public Tundra()
+    {
+        AssignID(6);
+        AssignName("Tundra");
+        Sprite tempSpr = null;
+        AssignSprite(tempSpr);
+        Dictionary<ResourceList, int> tempDict = new Dictionary<ResourceList, int>();
+
+        tempDict.Add(ResourceList.Hunt, 1);
+
+        AssignDictionary(tempDict);
+        AssignMoveRange(MoveRange.Short);
+        AssignExpedition(ExpeditionAvailability.High);
+    }
+
     public Tundra(Sprite pSpr)
     {
         AssignID(6);

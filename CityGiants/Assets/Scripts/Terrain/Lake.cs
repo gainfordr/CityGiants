@@ -16,6 +16,21 @@ public class Lake : LandTerrain {
 
     #region Functions
 
+    public Lake()
+    {
+        AssignID(2);
+        AssignName("Lake");
+        Sprite tempSpr = null;
+        AssignSprite(tempSpr);
+        Dictionary<ResourceList, int> tempDict = new Dictionary<ResourceList, int>();
+        tempDict.Add(ResourceList.Fish, 1);
+
+        AssignDictionary(tempDict);
+
+        AssignMoveRange(MoveRange.Average);
+        AssignExpedition(ExpeditionAvailability.Low);
+    }
+
     public Lake(Sprite pSpr)
     {
         AssignID(2);

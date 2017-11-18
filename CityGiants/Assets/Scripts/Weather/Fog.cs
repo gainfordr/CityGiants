@@ -16,6 +16,21 @@ public class Fog : Weather {
 
     #region Functions
 
+    public Fog()
+    {
+        //Inherit setting functions to set it correctly
+        base.AssignID(7);
+        base.AssignName("Fog");
+
+        GameObject tempSpr = null;
+        base.AssignParticle(tempSpr);
+
+        Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
+        tempDict.Add(WeatherEffect.Forecast, 0);
+        tempDict.Add(WeatherEffect.Defense, 1);
+        base.AssignDictionary(tempDict);
+    }
+
     public Fog(GameObject pSpr)
     {
         //Inherit setting functions to set it correctly

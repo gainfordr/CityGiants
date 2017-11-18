@@ -15,6 +15,22 @@ using UnityEngine;
 public class Thunderstorm : Weather {
 
     #region Functions
+
+    public Thunderstorm()
+    {
+        //Inherit setting functions to set it correctly
+        base.AssignID(5);
+        base.AssignName("Thunderstorm");
+
+        GameObject tempSpr = null;
+        base.AssignParticle(tempSpr);
+
+        Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
+        tempDict.Add(WeatherEffect.Construction, 0);
+        tempDict.Add(WeatherEffect.Research, 1);
+        base.AssignDictionary(tempDict);
+    }
+
     public Thunderstorm(GameObject pSpr)
     {
         //Inherit setting functions to set it correctly

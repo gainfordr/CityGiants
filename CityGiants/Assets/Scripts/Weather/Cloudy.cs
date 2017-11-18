@@ -16,6 +16,20 @@ public class Cloudy : Weather {
 
     #region Functions
 
+    public Cloudy()
+    {
+        //Inherit setting functions to set it correctly
+        base.AssignID(2);
+        base.AssignName("Cloudy");
+
+        GameObject tempSpr = null;
+        base.AssignParticle(tempSpr);
+
+        Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
+        tempDict.Add(WeatherEffect.None, 0);
+        base.AssignDictionary(tempDict);
+    }
+
     public Cloudy(GameObject pSpr)
     {
         //Inherit setting functions to set it correctly

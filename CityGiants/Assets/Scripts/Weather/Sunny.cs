@@ -17,6 +17,21 @@ public class Sunny : Weather {
 
     #region Functions
 
+    public Sunny()
+    {
+        //Inherit setting functions to set it correctly
+        base.AssignID(0);
+        base.AssignName("Sunny");
+
+        GameObject tempSpr = null;
+        base.AssignParticle(tempSpr);
+
+        Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
+        tempDict.Add(WeatherEffect.Food, 1);
+        tempDict.Add(WeatherEffect.Research, -1);
+        base.AssignDictionary(tempDict);
+    }
+
     public Sunny(GameObject pSpr)
     {
         //Inherit setting functions to set it correctly

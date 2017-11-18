@@ -16,6 +16,20 @@ public class Mountain : LandTerrain {
     
     #region Functions
 
+    public Mountain()
+    {
+        AssignID(5);
+        AssignName("Mountain");
+        Sprite tempSpr = null;
+        AssignSprite(tempSpr);
+        AssignMoveRange(MoveRange.Long);
+        AssignExpedition(ExpeditionAvailability.Average);
+        Dictionary<ResourceList, int> tempDict = new Dictionary<ResourceList, int>();
+        tempDict.Add(ResourceList.Hunt, 1);
+        tempDict.Add(ResourceList.Mine, 1);
+        AssignDictionary(tempDict);
+    }
+
     public Mountain(Sprite pSpr)
     {
         AssignID(5);
