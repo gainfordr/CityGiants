@@ -22,17 +22,20 @@ public class ForecastManager : MonoBehaviour {
     public Weather wCurrentWeather { get; private set; }            //Reference to current Weather in play
     public LandTerrain ltCurrentTerrain { get; private set; }       //Reference to current Terrain in play
     public Sprite[] sprParallaxBackground { get; private set; }     //Reference to sprites used to illustrate the parallax background
-    public int iForecastLength { get; private set; }
+    public int iForecastLength { get; private set; }                //How far the player can see for weather + landterrain, also is how long each of the lists should be
 
     private const int iDEFAULTFORECASTLENGTH = 3;                   //Const to init the forecast length to
     private const int iWEATHERTYPEAMOUNT = 9;
     private const int iTERRAINTYPEAMOUNT = 9;
-    public int iTimeLength { get; private set; }
+    public int iTimeLength { get; private set; }                    //How long will weather last for (default is 3)
 
     #endregion
 
     #region Functions
 
+    /// <summary>
+    /// Called to begin the setup of the Weather and LandTerrain forecasts, respectively.
+    /// </summary>
     void SetupManager()
     {
         //Used to initialize the values of the different
@@ -42,6 +45,10 @@ public class ForecastManager : MonoBehaviour {
         SetupForecast();
     }
 
+    /// <summary>
+    /// Initializes the Lists of Weather and LandTerrain, and randomly assigns values
+    /// Assigns the index 0 to the currentWeather and currentTerrain, respectively.
+    /// </summary>
     void SetupForecast()
     {
         //Sets the current weather and current terrain in one go
@@ -116,64 +123,170 @@ public class ForecastManager : MonoBehaviour {
         SetCurrentTerrain(ltObjs[0]);
     }
 
+    /// <summary>
+    /// Called to cycle through WeatherEffects based on iTimeLength, and assign new values if needed.
+    /// </summary>
     void CycleWeatherEffects()
     {
         //This will apply the effects of all current weather in play
 
+        //Decrement the iTimeLength by 1, to denote the passing of a day (Called by endTurn)
+        iTimeLength--;
+
+        //if iTimeLength is equal to 0, time to do some changes to the forecast
+        if (iTimeLength == 0)
+        {
+            //First, need to shift the elements of wOBjs
+            //These are what is currently put down as the current Weather and LandTerain, respectively
+            wObjs.RemoveAt(0); //this will remove the first element and shift elements down
+            //Next, add the new index 0 as the current weather
+            wCurrentWeather = wObjs[0];
+            //Once that is complete, need to apply a new Weather at the end of the wObjs list
+            //This will be done by accessing the current Terrain to see which is accesible
+            wObjs.Add(SelectNewWeather(ltCurrentTerrain));
+            //Once that has been done, reset the iTimeLength to 3 and the cycle will begin anew
+            iTimeLength = 3;
+
+            // TODO : Need to remind myself, for UI, that fog should just disable seeing what
+            //          The next choice of weather is, don't actually modify the Lists
+        }
     }
 
+    /// <summary>
+    /// Changes the current LandTerrain, based on having "traversed" it
+    /// </summary>
+    void CycleLandTerrain()
+    {
+        //This will change the current terrain, based on having "traversed" it
 
+        //Need to shift the values
+        ltObjs.RemoveAt(0);
+        //Set the current terrain to the new ltObjs at index 0
+        ltCurrentTerrain = ltObjs[0];
+        //Add a new Terrain to the end of 
+        int iTempNum = Random.Range(1, iTERRAINTYPEAMOUNT);
+        ltObjs.Add(SelectNewTerrain(iTempNum));
+    }
+
+    /// <summary>
+    /// Based on the LandTerrain given, will create and return a new Weather object
+    /// </summary>
+    /// <param name="aTerrain"></param>
+    /// <returns></returns>
     public Weather SelectNewWeather(LandTerrain aTerrain)
     {
         //After a weathereffect is done, select a new weather effect
         // based on the terrain given, so as to only allow certain weather
         int iTempNum = Random.Range(1, iWEATHERTYPEAMOUNT);
         Weather wTempWeather = new Weather();
-        
-        switch(aTerrain.sName)
+
+        //Based on the Terrain given, will have a weighted chance as to what weather will
+        //be based on what terrain is given. Example: cant be rain in the desert
+
+        //Need to create a basic int array, which will hold the possible choices based on
+        //  Index 0 being most likely, and Index 3 being least likely
+        int[] iTempArray = new int[4];
+
+        //NOTE: current values inside array of ints is placeholder, once the choices have been finalized,
+        //      they will be changed to the appropriate values
+        switch(aTerrain.iId)
         {
-            case "Forest":
-                if (iTempNum == 1)
-                    wTempWeather = RandomWeatherRange(1);
-                else if(iTempNum == 2)
-                     wTempWeather = RandomWeatherRange(2);
+            case 1:
+                iTempArray = new int[] { 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
                 return wTempWeather;
 
-            case "Grassland":
-                if (iTempNum == 1)
-                    wTempWeather = RandomWeatherRange(1);
-                else if (iTempNum == 2)
-                    wTempWeather = RandomWeatherRange(2);
+            case 2:
+                iTempArray = new int[] { 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
                 return wTempWeather;
 
-            case "Tundra":
-                break;
+            case 3:
+                iTempArray = new int[]{ 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
+                return wTempWeather;
 
-            case "Wasteland":
-                break;
+            case 4:
+                iTempArray = new int[] { 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
+                return wTempWeather;
 
-            case "Jungle":
-                break;
+            case 5:
+                iTempArray = new int[] { 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
+                return wTempWeather;
 
-            case "Lake":
-                break;
+            case 6:
+                iTempArray = new int[] { 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
+                return wTempWeather;
 
-            case "Mountain":
-                break;
+            case 7:
+                iTempArray = new int[] { 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
+                return wTempWeather;
 
-            case "Desert":
-                break;
+            case 8:
+                iTempArray = new int[] { 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
+                return wTempWeather;
 
-            case "Swamp":
-                break;
+            case 9:
+                iTempArray = new int[] { 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
+                return wTempWeather;
 
-            default:
+            default: //If this occurs, assume error
                 return wTempWeather;
         }
 
-        return wTempWeather;
     }
 
+    /// <summary>
+    /// Given an array of choices, randomly assigns a new Weather based on weighted values
+    /// </summary>
+    /// <param name="pChoiceArray">Used to indicate which Weather, with first being most likely</param>
+    /// <returns>Returns a Weather object, the result of the weighted random selection</returns>
+    public Weather WeatherWeightedRandom(int[] pChoiceArray)
+    {
+        // Moving the weighted random chance calculations to a seperate function, to avoid clutter
+        //From the intArray parameter, first value is considered most likely, with last value
+        //being the least likely choice
+
+        //For sanity sake, for now, there are 4 choices of weather weighted in the following
+        // 1) 40% chance (highly likely)
+        // 2) 30% chance (uncommon)
+        // 3) 20% chance (rare)
+        // 4) 10% chance (highly unlikely)
+
+        //Create a temp weather object
+        Weather wTempObj = new Weather();
+
+        if (Random.value <= 1.0f && Random.value >= 0.61f) //High Chance
+        {
+            wTempObj = RandomWeatherRange(pChoiceArray[0]);
+        }
+        else if (Random.value <= 0.6f && Random.value >= 0.31f) //Uncommon
+        {
+            wTempObj = RandomWeatherRange(pChoiceArray[1]);
+        }
+        else if (Random.value <= 0.3f && Random.value >= 0.1f) //rare
+        {
+            wTempObj = RandomWeatherRange(pChoiceArray[2]);
+        }
+        else //Unlikely
+        {
+            wTempObj = RandomWeatherRange(pChoiceArray[3]);
+        }
+
+        return wTempObj;
+    }
+
+    /// <summary>
+    /// Returns a specific Weather class based on the value of parameter iRange
+    /// </summary>
+    /// <param name="iRange">Specific choice of Weather Object</param>
+    /// <returns>wTempWeather</returns>
     public Weather RandomWeatherRange(int iRange)
     {
         Weather wTempWeather = new Weather();
@@ -220,6 +333,11 @@ public class ForecastManager : MonoBehaviour {
         return wTempWeather;
     }
 
+    /// <summary>
+    /// Returns a specific LandTerrain class based on the value of parameter iRange
+    /// </summary>
+    /// <param name="iRange"></param>
+    /// <returns></returns>
     LandTerrain SelectNewTerrain(int iRange)
     {
         //Select a new terrain
@@ -271,13 +389,20 @@ public class ForecastManager : MonoBehaviour {
         return tempTerrain;
     }
 
-
+    /// <summary>
+    /// Sets the current Weather to the given parameter of aWeather
+    /// </summary>
+    /// <param name="aWeather"></param>
     void SetCurrentWeather(Weather aWeather)
     {
         wCurrentWeather = aWeather;
         iTimeLength = InitWeatherLength(wCurrentWeather.enWeatherRange);
     }
 
+    /// <summary>
+    /// Sets the current LandTerrain to the given parameter of aLandTerrain
+    /// </summary>
+    /// <param name="aLandTerrain"></param>
     void SetCurrentTerrain(LandTerrain aLandTerrain)
     {
         //When called, will set the terrain to the specific terrain given
@@ -298,8 +423,12 @@ public class ForecastManager : MonoBehaviour {
         //Two background layers will have a speed relatively higher than the center layer
     }
 
-    //Given the weatherrange, it will set the time length on
-    // the weatherrange
+    /// <summary>
+    /// Takes a parameter of WeatherRange, and returns a random value based on what
+    /// size the WeatherRange is
+    /// </summary>
+    /// <param name="aWeatherRange"></param>
+    /// <returns></returns>
     public int InitWeatherLength(WeatherRange aWeatherRange)
     {
         int iTemp = 0;
