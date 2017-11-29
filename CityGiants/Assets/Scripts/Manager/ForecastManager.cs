@@ -25,8 +25,8 @@ public class ForecastManager : MonoBehaviour {
     public int iForecastLength { get; private set; }                //How far the player can see for weather + landterrain, also is how long each of the lists should be
 
     private const int iDEFAULTFORECASTLENGTH = 3;                   //Const to init the forecast length to
-    private const int iWEATHERTYPEAMOUNT = 9;
-    private const int iTERRAINTYPEAMOUNT = 9;
+    private const int iWEATHERTYPEAMOUNT = 8;
+    private const int iTERRAINTYPEAMOUNT = 8;
     public int iTimeLength { get; private set; }                    //How long will weather last for (default is 3)
 
     #endregion
@@ -56,63 +56,63 @@ public class ForecastManager : MonoBehaviour {
         // of a better way to do so
 
         //Will set up to know what weather is at least three spaces ahead
-        int iTempNum = Random.Range(1, iTERRAINTYPEAMOUNT);
+        int iTempNum = Random.Range(0, iTERRAINTYPEAMOUNT);
         LandTerrain ltTempTerrain = new LandTerrain();
 
         for (int i = 0; i < iForecastLength; i++)
         {
             switch (iTempNum)
             {
-                case 1: //Forest
+                case 0: //Forest
+                    ltTempTerrain = SelectNewTerrain(0);
+                    wObjs.Add(SelectNewWeather(ltTempTerrain));
+                    ltObjs.Add(ltTempTerrain);
+                    break;
+
+                case 1: //Grassland
                     ltTempTerrain = SelectNewTerrain(1);
                     wObjs.Add(SelectNewWeather(ltTempTerrain));
                     ltObjs.Add(ltTempTerrain);
                     break;
 
-                case 2: //Grassland
+                case 2: //Lake
                     ltTempTerrain = SelectNewTerrain(2);
                     wObjs.Add(SelectNewWeather(ltTempTerrain));
                     ltObjs.Add(ltTempTerrain);
                     break;
 
-                case 3: //Tundra
+                case 3: //Mountain
                     ltTempTerrain = SelectNewTerrain(3);
                     wObjs.Add(SelectNewWeather(ltTempTerrain));
                     ltObjs.Add(ltTempTerrain);
                     break;
 
-                case 4: //Lake
+                case 4: //Desert
                     ltTempTerrain = SelectNewTerrain(4);
                     wObjs.Add(SelectNewWeather(ltTempTerrain));
                     ltObjs.Add(ltTempTerrain);
                     break;
 
-                case 5: //Mountain
+                case 5: //Swamp
                     ltTempTerrain = SelectNewTerrain(5);
                     wObjs.Add(SelectNewWeather(ltTempTerrain));
                     ltObjs.Add(ltTempTerrain);
                     break;
 
-                case 6: //Swamp
+                case 6: //Tundra
                     ltTempTerrain = SelectNewTerrain(6);
                     wObjs.Add(SelectNewWeather(ltTempTerrain));
                     ltObjs.Add(ltTempTerrain);
                     break;
 
-                case 7: //Desert
+                case 7: //Jungle
                     ltTempTerrain = SelectNewTerrain(7);
                     wObjs.Add(SelectNewWeather(ltTempTerrain));
                     ltObjs.Add(ltTempTerrain);
                     break;
 
-                case 8: //Jungle
+                case 8: //Wasteland
                     ltTempTerrain = SelectNewTerrain(8);
-                    wObjs.Add(SelectNewWeather(ltTempTerrain));
-                    ltObjs.Add(ltTempTerrain);
-                    break;
-
-                case 9: //Wasteland
-                    ltTempTerrain = SelectNewTerrain(9);
                     wObjs.Add(SelectNewWeather(ltTempTerrain));
                     ltObjs.Add(ltTempTerrain);
                     break;
@@ -152,21 +152,7 @@ public class ForecastManager : MonoBehaviour {
         }
     }
 
-    /// <summary>
-    /// Changes the current LandTerrain, based on having "traversed" it
-    /// </summary>
-    void CycleLandTerrain()
-    {
-        //This will change the current terrain, based on having "traversed" it
-
-        //Need to shift the values
-        ltObjs.RemoveAt(0);
-        //Set the current terrain to the new ltObjs at index 0
-        ltCurrentTerrain = ltObjs[0];
-        //Add a new Terrain to the end of 
-        int iTempNum = Random.Range(1, iTERRAINTYPEAMOUNT);
-        ltObjs.Add(SelectNewTerrain(iTempNum));
-    }
+    #region Weather Specific Functions
 
     /// <summary>
     /// Based on the LandTerrain given, will create and return a new Weather object
@@ -177,7 +163,6 @@ public class ForecastManager : MonoBehaviour {
     {
         //After a weathereffect is done, select a new weather effect
         // based on the terrain given, so as to only allow certain weather
-        int iTempNum = Random.Range(1, iWEATHERTYPEAMOUNT);
         Weather wTempWeather = new Weather();
 
         //Based on the Terrain given, will have a weighted chance as to what weather will
@@ -189,8 +174,13 @@ public class ForecastManager : MonoBehaviour {
 
         //NOTE: current values inside array of ints is placeholder, once the choices have been finalized,
         //      they will be changed to the appropriate values
-        switch(aTerrain.iId)
+        switch (aTerrain.iId)
         {
+            case 0:
+                iTempArray = new int[] { 1, 2, 3, 4 };
+                wTempWeather = WeatherWeightedRandom(iTempArray);
+                return wTempWeather;
+
             case 1:
                 iTempArray = new int[] { 1, 2, 3, 4 };
                 wTempWeather = WeatherWeightedRandom(iTempArray);
@@ -202,7 +192,7 @@ public class ForecastManager : MonoBehaviour {
                 return wTempWeather;
 
             case 3:
-                iTempArray = new int[]{ 1, 2, 3, 4 };
+                iTempArray = new int[] { 1, 2, 3, 4 };
                 wTempWeather = WeatherWeightedRandom(iTempArray);
                 return wTempWeather;
 
@@ -227,11 +217,6 @@ public class ForecastManager : MonoBehaviour {
                 return wTempWeather;
 
             case 8:
-                iTempArray = new int[] { 1, 2, 3, 4 };
-                wTempWeather = WeatherWeightedRandom(iTempArray);
-                return wTempWeather;
-
-            case 9:
                 iTempArray = new int[] { 1, 2, 3, 4 };
                 wTempWeather = WeatherWeightedRandom(iTempArray);
                 return wTempWeather;
@@ -291,46 +276,104 @@ public class ForecastManager : MonoBehaviour {
     {
         Weather wTempWeather = new Weather();
 
-        switch(iRange)
+        switch (iRange)
         {
-            case 1: //Sunny
+            case 0: //Rain
                 wTempWeather = new Sunny();
                 return wTempWeather;
 
-            case 2: //Rain
+            case 1: //Sunny
                 wTempWeather = new Rain();
                 return wTempWeather;
 
-            case 3: //Cloudy
+            case 2: //Cloudy
                 wTempWeather = new Cloudy();
                 return wTempWeather;
 
-            case 4: //Snow
+            case 3: //Snow
                 wTempWeather = new Snow();
                 return wTempWeather;
 
-            case 5: //Windy
+            case 4: //Windy
                 wTempWeather = new Windy();
                 return wTempWeather;
 
-            case 6: //Thunderstorm
+            case 5: //Thunderstorm
                 wTempWeather = new Thunderstorm();
                 return wTempWeather;
 
-            case 7: //Hail
+            case 6: //Hail
                 wTempWeather = new Hail();
                 return wTempWeather;
 
-            case 8: //Fog
+            case 7: //Fog
                 wTempWeather = new Fog();
                 return wTempWeather;
 
-            case 9: //HeatWave
+            case 8: //HeatWave
                 wTempWeather = new HeatWave();
                 return wTempWeather;
         }
 
         return wTempWeather;
+    }
+
+    /// <summary>
+    /// Sets the current Weather to the given parameter of aWeather
+    /// </summary>
+    /// <param name="aWeather"></param>
+    void SetCurrentWeather(Weather aWeather)
+    {
+        wCurrentWeather = aWeather;
+        iTimeLength = InitWeatherLength(wCurrentWeather.enWeatherRange);
+    }
+
+    /// <summary>
+    /// Takes a parameter of WeatherRange, and returns a random value based on what
+    /// size the WeatherRange is
+    /// </summary>
+    /// <param name="aWeatherRange"></param>
+    /// <returns></returns>
+    public int InitWeatherLength(WeatherRange aWeatherRange)
+    {
+        int iTemp = 0;
+
+        if (aWeatherRange == WeatherRange.Short)
+        {
+            iTemp = Random.Range(1, 5);
+            return iTemp;
+        }
+        else if (aWeatherRange == WeatherRange.Medium)
+        {
+            iTemp = Random.Range(6, 8);
+            return iTemp;
+        }
+        else
+        {
+            iTemp = Random.Range(9, 10);
+            return iTemp;
+        }
+
+    }
+
+    #endregion
+
+    #region Terrain Specific Functions
+
+    /// <summary>
+    /// Changes the current LandTerrain, based on having "traversed" it
+    /// </summary>
+    void CycleLandTerrain()
+    {
+        //This will change the current terrain, based on having "traversed" it
+
+        //Need to shift the values
+        ltObjs.RemoveAt(0);
+        //Set the current terrain to the new ltObjs at index 0
+        ltCurrentTerrain = ltObjs[0];
+        //Add a new Terrain to the end of 
+        int iTempNum = Random.Range(1, iTERRAINTYPEAMOUNT);
+        ltObjs.Add(SelectNewTerrain(iTempNum));
     }
 
     /// <summary>
@@ -348,55 +391,45 @@ public class ForecastManager : MonoBehaviour {
 
         switch (iRange)
         {
-            case 1: //Forest
+            case 0: //Forest
                 tempTerrain = new Forest();
                 return tempTerrain;
 
-            case 2: //Grassland
+            case 1: //Grassland
                 tempTerrain = new Grassland();
                 return tempTerrain;
 
-            case 3: //Tundra
-                tempTerrain = new Tundra();
+            case 2: //Lake
+                tempTerrain = new Lake();
                 return tempTerrain;
 
-            case 4: //Lake
-                tempTerrain = new Lake();
-                break;
-
-            case 5: //Mountain
+            case 3: //Mountain
                 tempTerrain = new Mountain();
                 break;
 
-            case 6: //Swamp
-                tempTerrain = new Swamp();
-                break;
-
-            case 7: //Desert
+            case 4: //Desert
                 tempTerrain = new Desert();
                 break;
 
-            case 8: //Jungle
+            case 5: //Swamp
+                tempTerrain = new Swamp();
+                break;
+
+            case 6: //Tundra
+                tempTerrain = new Tundra();
+                break;
+
+            case 7: //Jungle
                 tempTerrain = new Jungle();
                 break;
 
-            case 9: //Wasteland
+            case 8: //Wasteland
                 tempTerrain = new Wasteland();
                 break;
         }
 
 
         return tempTerrain;
-    }
-
-    /// <summary>
-    /// Sets the current Weather to the given parameter of aWeather
-    /// </summary>
-    /// <param name="aWeather"></param>
-    void SetCurrentWeather(Weather aWeather)
-    {
-        wCurrentWeather = aWeather;
-        iTimeLength = InitWeatherLength(wCurrentWeather.enWeatherRange);
     }
 
     /// <summary>
@@ -412,6 +445,9 @@ public class ForecastManager : MonoBehaviour {
 
     }
 
+    #endregion
+
+
     void HandleParallax()
     {
         // Function to handle the parallax background for each terrain
@@ -422,41 +458,6 @@ public class ForecastManager : MonoBehaviour {
 
         //Two background layers will have a speed relatively higher than the center layer
     }
-
-    /// <summary>
-    /// Takes a parameter of WeatherRange, and returns a random value based on what
-    /// size the WeatherRange is
-    /// </summary>
-    /// <param name="aWeatherRange"></param>
-    /// <returns></returns>
-    public int InitWeatherLength(WeatherRange aWeatherRange)
-    {
-        int iTemp = 0;
-
-        if(aWeatherRange == WeatherRange.Short)
-        {
-            iTemp = Random.Range(1, 5);
-            return iTemp;
-        }
-        else if(aWeatherRange == WeatherRange.Medium)
-        {
-            iTemp = Random.Range(6, 8);
-            return iTemp;
-        }
-        else
-        {
-            iTemp = Random.Range(9, 10);
-            return iTemp;
-        }
-
-    }
-    
-    void Update()
-    {
-        //Reason to keep the update function is to keep updating the parallax function
-        HandleParallax();
-    }
-
 
     #endregion
 }

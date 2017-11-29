@@ -27,7 +27,7 @@ public class Thunderstorm : Weather {
 
         Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
         tempDict.Add(WeatherEffect.Construction, 0);
-        tempDict.Add(WeatherEffect.Research, 1);
+        tempDict.Add(WeatherEffect.Research_Regular, 1);
         base.AssignDictionary(tempDict);
     }
 
@@ -42,7 +42,7 @@ public class Thunderstorm : Weather {
 
         Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
         tempDict.Add(WeatherEffect.Construction, 0);
-        tempDict.Add(WeatherEffect.Research, 1);
+        tempDict.Add(WeatherEffect.Research_Regular, 1);
         base.AssignDictionary(tempDict);
     }
     #endregion 

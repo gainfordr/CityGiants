@@ -21,6 +21,22 @@ public enum WeatherRange
 
 public enum WeatherEffect
 {
+    Food_Agriculture,       //Can be plus or minus (+1 or -1)
+    Food_Fish,
+    Food_Hunt,
+    Food_WildProduce,
+    Research_Regular,       //Can be plus (+1)
+    Research_Arcane,
+    Production,             //Can be minus (-1)
+    Repairs,                //Can be none (0)
+    Times,                  //Can be longer (+1)
+    Forecast,               //Can be none, which will disable what can be seen on adjacent spaces (0)
+    Defense,
+    Construction,
+    None
+
+    //Keeping just in case things need to be reverted
+    /*
     Food,           //Can be plus or minus (+1 or -1)
     Agriculture,
     Production,     //Can be minus (-1)
@@ -33,6 +49,7 @@ public enum WeatherEffect
     Defense,
     Meat,
     None            //If no effect, will simply have this
+    */
 };
 
 public class Weather : MonoBehaviour {

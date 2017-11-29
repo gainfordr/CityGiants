@@ -26,10 +26,10 @@ public class HeatWave : Weather {
         base.AssignParticle(tempSpr);
 
         Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
-        tempDict.Add(WeatherEffect.Agriculture, -1);
+        tempDict.Add(WeatherEffect.Food_Agriculture, -1);
         tempDict.Add(WeatherEffect.Production, -1);
         tempDict.Add(WeatherEffect.Defense, 1);
-        tempDict.Add(WeatherEffect.Meat, 1);
+        tempDict.Add(WeatherEffect.Food_Hunt, 1);
         base.AssignDictionary(tempDict);
     }
 
@@ -43,10 +43,10 @@ public class HeatWave : Weather {
         base.AssignParticle(tempSpr);
 
         Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
-        tempDict.Add(WeatherEffect.Agriculture, -1);
+        tempDict.Add(WeatherEffect.Food_Agriculture, -1);
         tempDict.Add(WeatherEffect.Production, -1);
         tempDict.Add(WeatherEffect.Defense, 1);
-        tempDict.Add(WeatherEffect.Meat, 1);
+        tempDict.Add(WeatherEffect.Food_Hunt, 1);
         base.AssignDictionary(tempDict);
     }
 

@@ -29,6 +29,15 @@ public enum MoveRange
 
 public enum ResourceList
 {
+    /*
+        Wood, 
+        Food_Hunt,
+        Food_WildProduce,
+        Food_Fish,
+        Mine
+
+     */
+
     Wood,
     Hunt,
     WildProduce,

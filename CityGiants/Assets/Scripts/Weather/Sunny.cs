@@ -27,8 +27,8 @@ public class Sunny : Weather {
         base.AssignParticle(tempSpr);
 
         Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
-        tempDict.Add(WeatherEffect.Food, 1);
-        tempDict.Add(WeatherEffect.Research, -1);
+        tempDict.Add(WeatherEffect.Food_Agriculture, 1);
+        tempDict.Add(WeatherEffect.Research_Regular, -1);
         base.AssignDictionary(tempDict);
     }
 
@@ -42,8 +42,8 @@ public class Sunny : Weather {
         base.AssignParticle(tempSpr);
 
         Dictionary<WeatherEffect, int> tempDict = new Dictionary<WeatherEffect, int>();
-        tempDict.Add(WeatherEffect.Food, 1);
-        tempDict.Add(WeatherEffect.Research, -1);
+        tempDict.Add(WeatherEffect.Food_Agriculture, 1);
+        tempDict.Add(WeatherEffect.Research_Regular, -1);
         base.AssignDictionary(tempDict);
     }
 
